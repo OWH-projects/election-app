@@ -32,5 +32,5 @@ EXCLUDES = ["*.md", "requirements.txt"]
 DEFAULT_CONTEXT = {
     'name': 'election_2014',
     'title': 'Nebraska Primary 2014',
-    'current': datetime.datetime.now().strftime("%I:%M")
+    'current': datetime.datetime.now().strftime("%I:&M")
 }
