@@ -6,18 +6,23 @@
 <div class="row">
 <div class="col-md-12">
 
-<span class="label label-primary">Last updated: {{ current }}</span>
+<span class="label label-primary">Last updated {{ testtime }}</span>
+<br/>
 
-<table class="table">
-    {% for row in data[1:] %}
-<tr><td>
-<strong>{{ row.RaceName|replace('For United States', 'U.S.')|replace('For Representative in Congress', 'U.S. Representative')|replace('For ','')|replace('Member of the ','')|replace('Natural Resources District', 'NRD') }}{% if row.AreaNum %} ({{ row.AreaNum }}){% endif %}</strong>
-<td>
-      {{ row.CandidateName }}
-    </td>
-</tr>
+
+{% for group in data|groupby('RaceName') %}
+    <h3>{{ group.grouper|replace('For United States', 'U.S.')|replace('For Representative in Congress', 'U.S. Representative')|replace('For ','')|replace('Member of the ','')|replace('Natural Resources District', 'NRD')|replace('Board of Directors','Board')  }}{% if group.AreaNum %} ({{ group.AreaNum }}){% endif %} <small>{{ group.PrecinctsReporting}}</small></h3>
+    <table class="table">
+    {% for person in group.list %}
+        <tr>
+        <td>{{ person.CandidateName }}</td>
+        <td style="text-align:right;">{{ person.CandidateVotes }}</td>
+        </tr>
     {% endfor %}
-</table>
+    </table>
+{% endfor %}
+
+
   </div>
   </div>
 </div>
